@@ -1,2 +1,2 @@
 # Angular-Homes-Tutorial
-Learn to use Angular for the first time.
+Learning to use Angular for the first time.
