@@ -1,17 +1,23 @@
 import {
-    Component
+  Component
 } from '@angular/core';
 
 import {
   HousingLocation
 } from '../housing-location/housing-location';
 
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  HousingLocationInfo
+} from '../housinglocation';
 
 @Component({
-    selector: 'app-home',
-    imports: [CommonModule, HousingLocation],
-    template: `
+  selector: 'app-home',
+  imports: [CommonModule, HousingLocation],
+  template: `
    <section>
       <form>
         <input type="text" placeholder="Filter by city" />
@@ -22,7 +28,7 @@ import { CommonModule } from '@angular/common';
       <app-housing-location></app-housing-location>
     </section>
   `,
-    styles: `.results {
+  styles: `.results {
   display: grid;
   column-gap: 14px;
   row-gap: 14px;
@@ -56,9 +62,19 @@ button {
 @media (max-width: 499px) {
   .results {
       grid-template-columns: 1fr;
-  }    
+  }
 }`
 })
 export class Home {
-
+  readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
+  housingLocation: HousingLocation = {
+    id: 9999,
+    name: 'Test Home',
+    city: 'Test city',
+    state: 'ST',
+    photo: `${this.baseUrl}/example-house.jpg`,
+    availableUnits: 99,
+    wifi: true,
+    laundry: false,
+  };
 }
