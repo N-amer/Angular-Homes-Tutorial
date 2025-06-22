@@ -11,7 +11,7 @@ import {
     template: `
     <p>housing-location works!</p>
   `,
-    styleUrls: ['./housing-location.css'],
+    // styleUrls: [''],
 })
 export class HousingLocation {
     housingLocation = input.required < HousingLocationInfo > ();
