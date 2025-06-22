@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HousingLocation} from '../housing-location/housing-location';
 import {HousingLocationInfo} from '../housinglocation';
-
 @Component({
   selector: 'app-home',
   imports: [CommonModule, HousingLocation],
@@ -14,14 +13,13 @@ import {HousingLocationInfo} from '../housinglocation';
       </form>
     </section>
     <section class="results">
-      <app-housing-location></app-housing-location>
+      <app-housing-location [housingLocation]="housingLocation"></app-housing-location>
     </section>
   `,
   styleUrls: ['./home.css'],
 })
 export class Home {
   readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
-
   housingLocation: HousingLocationInfo = {
     id: 9999,
     name: 'Test Home',
