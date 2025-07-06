@@ -2,20 +2,20 @@ import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HousingLocation} from '../housing-location/housing-location';
 import {HousingLocationInfo} from '../housinglocation';
-import {Housing} from '../housing';
+import {HousingService} from '../housing';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, HousingLocation],
-   template: `
+  template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city" />
-        <button class="primary" type="button">Search</button>
+        <input type="text" placeholder="Filter by city" #filter />
+        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
     <section class="results">
       <app-housing-location
-        *ngFor="let housingLocation of housingLocationList"
+        *ngFor="let housingLocation of filteredLocationList"
         [housingLocation]="housingLocation"
       ></app-housing-location>
     </section>
@@ -23,11 +23,20 @@ import {Housing} from '../housing';
   styleUrls: ['./home.css'],
 })
 export class Home {
-  readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
   housingLocationList: HousingLocationInfo[] = [];
-  housingService: Housing = inject(Housing);
-  
+  housingService: HousingService = inject(HousingService);
+  filteredLocationList: HousingLocationInfo[] = [];
   constructor() {
     this.housingLocationList = this.housingService.getAllHousingLocations();
+    this.filteredLocationList = this.housingLocationList;
+  }
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList;
+      return;
+    }
+    this.filteredLocationList = this.housingLocationList.filter((housingLocation) =>
+      housingLocation?.city.toLowerCase().includes(text.toLowerCase()),
+    );
   }
 }
